@@ -8,7 +8,7 @@ class movie extends Model
 {
     //
     protected $table ='movie';
-    protected $primaryKey = 'mid';
+    protected $primaryKey = 'mID';
     public $timestamps = false;
 
 }

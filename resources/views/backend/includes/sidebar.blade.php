@@ -75,11 +75,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ active_class(Active::checkUriPattern('admin/movie/create')) }}" href="{{ url('admin/movie/create') }}">
-                    Add Movie
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/movie/showrate')) }}" href="{{ url('admin/movie/showrate') }}">
                     View Rating
                 </a>

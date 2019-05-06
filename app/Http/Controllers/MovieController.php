@@ -21,7 +21,7 @@ class MovieController extends Controller
 	}
 	public function store(Request $request) {
 		$movie = new Movie();
-		$movie->mid = $request->get('mid');
+		$movie->mID = $request->get('mid');
 		$movie->title = $request->get('title');
 		$movie->year = $request->get('year');
 		$movie->director = $request->get('director');
@@ -39,16 +39,41 @@ class MovieController extends Controller
 		}
 	}
 	public function show($id) {
-		return view('movieedit');
+		echo 'show';
 	}
 	public function edit($id) {
-		echo 'save edit';
+		$movie = Movie::find($id);
+		return view('movieupdate',['movie'=>$movie]);
 	}
 	public function update(Request $request, $id) {
-		echo 'update';
+		$movie = Movie::find($id);
+		$movie->mID = $request->get('mid');
+		$movie->title = $request->get('title');
+		$movie->year = $request->get('year');
+		$movie->director = $request->get('director');
+		try{
+			$movie->save();
+			return redirect()->route('movie.index')->withFlashSuccess('Movie is updated');
+		}catch(\Exception $e){
+			return redirect()
+            ->back()
+            ->withInput($request->all())
+            ->withFlashDanger("Movie can't be updated. ". $e->getMessage());
+		}
+
 	}
 	public function destroy($id) {
-		echo 'destroy';
+		
+		try{
+			$res = Movie::destroy($id);
+			if ($res)
+				return 1;
+			else
+				return 0;
+		}catch(\Exception $e){
+			return 0;
+		}
+
 	}
 
 	public function getform(){
@@ -126,9 +151,15 @@ EOF;
 	}
 
 	public function getmovie(){
-		$movies = DB::table('movie')->select('*');
+		$movies = Movie::select(['mID', 'title', 'director', 'year'])->get();
 
-        return Datatables::of($movies)->make(true);
+        return Datatables::of($movies)
+        				->addColumn('action', function ($movie) {
+        										$html = '<a href="'.route('movie.edit', ['id' => $movie->mID]).'" class="btn btn-primary btn-sm"><i class="far fa-edit"></i> Edit</a>&nbsp;&nbsp;&nbsp;';
+        										$html .= '<a data-id="'.$movie->mID.'" class="btn btn-danger btn-sm movie-delete"><i class="far fa-trash-alt"></i></i> Delete</a>' ;
+                								return $html;
+            								})
+        				->make(true);
 	}
 
 }

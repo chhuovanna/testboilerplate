@@ -8,7 +8,7 @@ class reviewer extends Model
 {
     //
     protected $table ='reviewer';
-    protected $primaryKey = 'rid';
+    protected $primaryKey = 'rID';
     public $timestamps = false;
 
 }

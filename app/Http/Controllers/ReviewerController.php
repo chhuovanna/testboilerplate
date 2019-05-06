@@ -15,7 +15,7 @@ class ReviewerController extends Controller
 	}
 	public function store(Request $request) {
 		$reviewer = new Reviewer();
-		$reviewer->rid = $request->get('rid');
+		$reviewer->rID = $request->get('rid');
 		$reviewer->name = $request->get('name');
 
 		try {
