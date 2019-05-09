@@ -4,10 +4,11 @@
 
 @section('content')
 
+@php
+    $options = array();
+@endphp
 
-
-<form  method="post">
-    @csrf
+<form  method="get">
 	<div class="card">
         <div class="card-body">
             <div class="row">
@@ -28,13 +29,13 @@
                             ->class('col-md-1 form-control-label')
                             ->for('mid') }}
 
-                        <div class="col-md-3">
-                             <select name="mid" id="mid" class="form-control" >
-                                @foreach ($movies as $movie) {
-                                    <option value='{{ $movie->mID }}'>{{ $movie->title}}</option>"
-                                @endforeach
-                                
-                            </select>
+                        <div class="col-md-3" >
+                             
+                            @foreach ($movies as $movie) 
+                                @php $options[$movie->mID] = $movie->title; @endphp
+                            @endforeach
+
+                            {{html()->select('mid',$options)->class('form-control')}}
                         </div><!--col-->
                     </div><!--form-group-->
                 </div>
@@ -55,22 +56,28 @@
 
 <script>
 
-    $('#mid').off('change');
-    $('#mid').on('change', function(){
-    	//alert('change');
-        $.ajax({
-                type:"GET",
-                url:"getrating",
-                data:{mid: parseInt($('#mid').val())},    
-                success: function (data) {
-                    console.log(data);
-                    $('#result').html(data);
-                }, 
-                error: function(data){
-                    console.log(data);
-                }
-            });
+    $(document).ready(function(){
+        $('#mid').off('change');
+        $('#mid').on('change', function(){
+            //alert('change');
+            $.ajax({
+                    type:"GET",
+                    url:"getrating",
+                    data:{mid: parseInt($('#mid').val())},    
+                    success: function (data) {
+                        console.log(data);
+                        $('#result').html(data);
+                    }, 
+                    error: function(data){
+                        console.log(data);
+                    }
+                });
+        });
+
+        $('#mid').select2();
+
     });
+
 
 </script>
 

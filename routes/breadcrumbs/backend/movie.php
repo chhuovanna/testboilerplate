@@ -14,14 +14,13 @@ Breadcrumbs::for('movie.edit', function ($trail,$id) {
 });
 
 Breadcrumbs::for('movie.showrate', function ($trail) {
-	$trail->parent('movie.index');
-    $trail->push( 'Rate Movie', route('movie.rate'));
+	$trail->parent('movie.rate');
+    $trail->push( 'Show Rate', route('movie.showrate'));
 });
 
 
 Breadcrumbs::for('movie.rate', function ($trail) {
 	$trail->parent('movie.index');
-	$trail->parent('movie.showrate');
-    $trail->push( 'Show Rate', route('movie.showrate'));
+    $trail->push( 'Rate Movie', route('movie.rate'));
 });
 

@@ -151,7 +151,7 @@ EOF;
 	}
 
 	public function getmovie(){
-		$movies = Movie::select(['mID', 'title', 'director', 'year'])->get();
+		$movies = Movie::select(['mID', 'title', 'director', 'year']);
 
         return Datatables::of($movies)
         				->addColumn('action', function ($movie) {

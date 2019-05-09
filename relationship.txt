@@ -1,0 +1,40 @@
+one to one
+
+user model
+phone()
+$this->hasOne(App\phone, fkname_in phone, local_key(other unique key of user rather than pk));  mean there is user_id in phone;
+
+phone model
+user
+$this->belongTo(App\user, fkname_in phone,other_key (other unique key of user rather than pk)); mean phone belongTo only one user
+
+one to many
+
+post model
+comment()
+$this->hasMany(App\comment, fkname_in comment, local_key(other unique key of post rather than pk)) mean post has many comment, in comments there are pk of post
+
+comment model
+post(){
+	$this->belongTo(App\post, fkname_in comment,other_key (other unique key of post rather than pk)); mean comment belongTo only one post	
+}
+
+many to many
+user model
+role()
+$this->belongToMany(App\role, intermediate table name, pk of user 'it is in user model', pk role);
+
+role model
+user()
+$this->belongToMany(App\user, intermediate table name, pk of role, pk user)
+
+get intermediate table
+$user = App\User::find(1);
+
+foreach ($user->roles as $role) {
+    echo $role->pivot->created_at;
+} 
+
+pivot has only key (pk user , pk role) if need more attribute like created_at
+in user model
+$this->belongsToMany('App\Role')->withPivot('created_at', 'updated_at');

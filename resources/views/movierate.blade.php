@@ -6,7 +6,7 @@
 
 
 
-<form action="{{ url('admin\movie\saverating')}}" method="post">
+<form action="{{ url('admin/movie/saverating')}}" method="post">
     @csrf
 <div class="card">
         <div class="card-body">
@@ -29,9 +29,9 @@
                             ->for('mid') }}
 
                         <div class="col-md-3">
-                             <select name="mid" class="form-control" >
-                                @foreach ($movies as $movie) {
-                                    <option value='{{ $movie->mID }}'>{{ $movie->title}}</option>"
+                             <select name="mid" id="mid" class="form-control" >
+                                @foreach ($movies as $movie) 
+                                    <option value='{{ $movie->mID }}'>{{ $movie->title}}</option>
                                 @endforeach
                                 
                             </select>
@@ -44,7 +44,7 @@
                             ->for('rid') }}
 
                         <div class="col-md-3">
-                            <select name="rid" class="form-control" >
+                            <select name="rid" id="rid" class="form-control" >
                                     @foreach ($reviewers as $reviewer) 
                                         <option value='{{$reviewer->rID}}'>{{$reviewer->name }}</option>
                                     @endforeach    
@@ -83,4 +83,18 @@
     </div><!--card-->
 {{ html()->form()->close() }}
 @endsection
+@push('after-scripts')
 
+<script>
+
+    $(document).ready(function(){
+
+        $('#mid').select2();
+        $('#rid').select2();
+
+    });
+
+
+</script>
+
+@endpush
