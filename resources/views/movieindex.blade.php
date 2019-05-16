@@ -59,13 +59,18 @@ $(document).ready(function() {
 
             {data: 'mID', name: 'mID'},
 
-            {data: 'title', name: 'title'},
+            {data: 'title', name: 'title',
+                render:function ( data, type, row, meta ) {
+                    return type === 'display' && data.length > 40 ? '<span title="'+data+'">'+data.substr( 0, 38 )+'...</span>' : data; 
+                    }
+            },
 
             {data: 'director', name: 'director'},
 
             {data: 'year', name: 'year'},
 
-           {data:'action', name: 'action', orderable: false, searchable: false}
+           {data:'action', name: 'action', orderable: false, searchable: false},
+        
 
         ],
         "order":[[0,'desc']]
