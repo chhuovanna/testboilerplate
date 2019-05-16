@@ -59,13 +59,13 @@ $(document).ready(function() {
 
             {data: 'mID', name: 'mID'},
 
-            {data: 'title', name: 'title',
-                render:function ( data, type, row, meta ) {
-                    return type === 'display' && data.length > 40 ? '<span title="'+data+'">'+data.substr( 0, 38 )+'...</span>' : data; 
-                    }
-            },
+            {data: 'title', name: 'title'},
 
-            {data: 'director', name: 'director'},
+            {data: 'director', name: 'director',
+                render:function ( data, type, row ) {
+                    return type === 'display' && data.length > 20 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
+                }
+            },
 
             {data: 'year', name: 'year'},
 

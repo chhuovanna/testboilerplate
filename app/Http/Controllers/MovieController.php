@@ -151,7 +151,8 @@ EOF;
 	}
 
 	public function getmovie(){
-		$movies = Movie::select(['mID', 'title', 'director', 'year']);
+		//$movies = Movie::select(['mID', 'title', 'director', 'year']);
+		$movies = Movie::select(['mID', DB::raw(" if(length(title)<40, title, concat(subString(title,1,40),'...' ) )  as title"), 'director', 'year']);
 
         return Datatables::of($movies)
         				->addColumn('action', function ($movie) {
