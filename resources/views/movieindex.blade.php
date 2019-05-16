@@ -29,6 +29,8 @@
 
                                 <th>Year</th>
 
+                                <th>Rate</th>                                
+
                                 <th>Action</th>
 
                             </tr>
@@ -63,11 +65,12 @@ $(document).ready(function() {
 
             {data: 'director', name: 'director',
                 render:function ( data, type, row ) {
-                    return type === 'display' && data.length > 20 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
+                    return type === 'display' && data && data.length > 20 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
                 }
             },
 
             {data: 'year', name: 'year'},
+            {data:'avgstars', name:'avgstars'},
 
            {data:'action', name: 'action', orderable: false, searchable: false},
         

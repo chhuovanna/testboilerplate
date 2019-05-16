@@ -39,7 +39,7 @@ class MovieController extends Controller
 		}
 	}
 	public function show($id) {
-		echo 'show';
+		echo 'showlalal';
 	}
 	public function edit($id) {
 		$movie = Movie::find($id);
@@ -103,9 +103,9 @@ class MovieController extends Controller
 
 
 
-	public function showrate(){
+	public function showrate($id){
 		$movies = movie::all();
-		return view('movieshowrate', [ 'movies' => $movies]);
+		return view('movieshowrate', [ 'movies' => $movies,'mID' => $id]);
 	}
 
 	public function getrating(Request $request){
@@ -152,12 +152,15 @@ EOF;
 
 	public function getmovie(){
 		//$movies = Movie::select(['mID', 'title', 'director', 'year']);
-		$movies = Movie::select(['mID', DB::raw(" if(length(title)<40, title, concat(subString(title,1,40),'...' ) )  as title"), 'director', 'year']);
+		$movies = Movie::select(['movie.mID', DB::raw(" if(length(title)<40, title, concat(subString(title,1,40),'...' ) )  as title"), 'director', 'year', DB::raw("AVG(stars) as avgstars")])->leftJoin('rating', 'movie.mID', '=', 'rating.mID')
+        ->groupBy('movie.mID');;
 
         return Datatables::of($movies)
         				->addColumn('action', function ($movie) {
         										$html = '<a href="'.route('movie.edit', ['id' => $movie->mID]).'" class="btn btn-primary btn-sm"><i class="far fa-edit"></i> Edit</a>&nbsp;&nbsp;&nbsp;';
-        										$html .= '<a data-id="'.$movie->mID.'" class="btn btn-danger btn-sm movie-delete"><i class="far fa-trash-alt"></i></i> Delete</a>' ;
+        										$html .= '<a data-id="'.$movie->mID.'" class="btn btn-danger btn-sm movie-delete"><i class="far fa-trash-alt"></i></i> Delete</a>&nbsp;&nbsp;&nbsp;' ;
+        										$html .= '<a  href="'.route('movie.showrate', ['id' => $movie->mID]).'" class="btn btn-info btn-sm movie-rate-info"><i class="far fa-search"></i></i> Look</a>' ;
+        										
                 								return $html;
             								})
         				->make(true);

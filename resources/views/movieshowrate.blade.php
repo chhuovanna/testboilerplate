@@ -32,7 +32,7 @@
                         <div class="col-md-3" >
                              
                             @foreach ($movies as $movie) 
-                                @php $options[$movie->mID] = $movie->title; @endphp
+                                @php $options[$movie->mID] = $movie->mID.':'.$movie->title; @endphp
                             @endforeach
 
                             {{html()->select('mid',$options)->class('form-control')}}
