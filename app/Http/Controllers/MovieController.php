@@ -157,9 +157,9 @@ EOF;
 
         return Datatables::of($movies)
         				->addColumn('action', function ($movie) {
-        										$html = '<a href="'.route('movie.edit', ['id' => $movie->mID]).'" class="btn btn-primary btn-sm"><i class="far fa-edit"></i> Edit</a>&nbsp;&nbsp;&nbsp;';
-        										$html .= '<a data-id="'.$movie->mID.'" class="btn btn-danger btn-sm movie-delete"><i class="far fa-trash-alt"></i></i> Delete</a>&nbsp;&nbsp;&nbsp;' ;
-        										$html .= '<a  href="'.route('movie.showrate').'" class="btn btn-info btn-sm movie-rate-info"><i class="far fa-search"></i> Look</a>' ;
+        										$html = '<a href="'.route('movie.edit', ['id' => $movie->mID]).'" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>&nbsp;&nbsp;&nbsp;';
+        										$html .= '<a data-id="'.$movie->mID.'" class="btn btn-danger btn-sm movie-delete"><i class="far fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp;' ;
+        										$html .= '<a data-id="'.$movie->mID.'"  class="btn btn-info btn-sm movie-rate-info"><i class="fa fa-search" aria-hidden="true"></i></i></a>' ;
         										
                 								return $html;
             								})
