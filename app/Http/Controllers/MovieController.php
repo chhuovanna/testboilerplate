@@ -103,9 +103,9 @@ class MovieController extends Controller
 
 
 
-	public function showrate($id){
+	public function showrate(){
 		$movies = movie::all();
-		return view('movieshowrate', [ 'movies' => $movies,'mID' => $id]);
+		return view('movieshowrate', [ 'movies' => $movies]);
 	}
 
 	public function getrating(Request $request){
@@ -159,7 +159,7 @@ EOF;
         				->addColumn('action', function ($movie) {
         										$html = '<a href="'.route('movie.edit', ['id' => $movie->mID]).'" class="btn btn-primary btn-sm"><i class="far fa-edit"></i> Edit</a>&nbsp;&nbsp;&nbsp;';
         										$html .= '<a data-id="'.$movie->mID.'" class="btn btn-danger btn-sm movie-delete"><i class="far fa-trash-alt"></i></i> Delete</a>&nbsp;&nbsp;&nbsp;' ;
-        										$html .= '<a  href="'.route('movie.showrate', ['id' => $movie->mID]).'" class="btn btn-info btn-sm movie-rate-info"><i class="far fa-search"></i></i> Look</a>' ;
+        										$html .= '<a  href="'.route('movie.showrate').'" class="btn btn-info btn-sm movie-rate-info"><i class="far fa-search"></i> Look</a>' ;
         										
                 								return $html;
             								})
