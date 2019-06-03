@@ -67,11 +67,11 @@ class MovieController extends Controller
 		try{
 			$res = Movie::destroy($id);
 			if ($res)
-				return 1;
+				return [1];
 			else
-				return 0;
+				return [0];
 		}catch(\Exception $e){
-			return 0;
+			return [0,$e->getMessage()];
 		}
 
 	}
