@@ -15,7 +15,7 @@
     <div class="col">
         <div class="form-group row">
             {{ html()->label('MID')
-                ->class('col-md-1 form-control-label')
+                ->class('col-md-2 form-control-label')
                 ->for('mid') }}
 
             <div class="col-md-3">
@@ -30,7 +30,7 @@
 
         <div class="form-group row">
             {{ html()->label('Title')
-                ->class('col-md-1 form-control-label')
+                ->class('col-md-2 form-control-label')
                 ->for('title') }}
 
             <div class="col-md-3">
@@ -42,7 +42,7 @@
         </div><!--form-group-->
         <div class="form-group row">
             {{ html()->label('Released Year')
-                ->class('col-md-1 form-control-label')
+                ->class('col-md-2 form-control-label')
                 ->for('year') }}
 
             <div class="col-md-3">
@@ -55,13 +55,48 @@
         </div><!--form-group-->
         <div class="form-group row">
             {{ html()->label('Director')
-                ->class('col-md-1 form-control-label')
+                ->class('col-md-2 form-control-label')
                 ->for('director') }}
 
             <div class="col-md-3">
                 {{ html()->text('director',$director)
                     ->class('form-control')
                     ->placeholder('director') }}
+            </div><!--col-->
+        </div><!--form-group-->
+
+        <div class="form-group row">
+            {{ html()->label('Thumbnail')
+                ->class('col-md-2 form-control-label')
+                ->for('thumbnail_id') }}
+
+            <div class="col-md-3">
+
+
+            {{ html()->input('file','thumbnail_id')
+                    ->class('form-control')
+                    ->placeholder('Thumbnail')
+                    ->required()
+                }}
+
+            </div><!--col-->
+        </div><!--form-group-->
+
+        <div class="form-group row">
+            {{ html()->label('Photos')
+                ->class('col-md-2 form-control-label')
+                ->for('photos') }}
+
+            <div class="col-md-3">
+
+
+                {{ html()->input('file','photos[]')
+                        ->class('form-control')
+                        ->placeholder('image')
+                        ->attributes(['multiple'=>'true'])
+
+                    }}
+
             </div><!--col-->
         </div><!--form-group-->
     </div><!--col-->

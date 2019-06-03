@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File; // for deleting file
 use App\movie;
 use App\reviewer;
 use App\rating;
+use App\image;
 use Datatables;
 
 use DB;
@@ -26,8 +28,45 @@ class MovieController extends Controller
 		$movie->year = $request->get('year');
 		$movie->director = $request->get('director');
 
+		$validateData = $request->validate([
+			'thumbnail_id' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+			,'photos[]' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048']);
+
+		//get file from input
+		$file = $request->file('thumbnail_id');
+		$thumbnail = new Image();
+		$thumbnail->file_name = rand(1111,9999).time().'.'.$file->getClientOriginalExtension();
+		$thumbnail->location = 'images\thumbnail'; //thumbnail is stored in public/images/thumbnail
+		
 		try {
+			$thumbnail->save();
+			//movie the file to it's location on server
+			$file->move(public_path($thumbnail->location),$thumbnail->file_name);
+
+			//thumbnail of movie
+			$movie->thumbnail_id = $thumbnail->image_id;
 			$movie->save();
+
+			//test if user has upload other photos or not
+			if($request->hasFile('photos')){
+
+				//get the array of photos
+				$photos = $request->file('photos');
+
+
+				foreach ($photos as $key => $file) {
+					$photo = new Image();
+					$photo->file_name = rand(1111,9999).time().'.'.$file->getClientOriginalExtension();
+
+					//photos are stored on server in folder public/images/photos
+					$photo->location = 'images\photos';
+					
+					//photo belongs to movie
+					$photo->mID = $request->get('mid');
+					$photo->save();
+					$file->move(public_path($photo->location),$photo->file_name);
+				}
+			}
 			return redirect()->route('movie.index')->withFlashSuccess('Movie is added');
 		}
 		catch (\Exception $e) {
@@ -64,9 +103,45 @@ class MovieController extends Controller
 	}
 	public function destroy($id) {
 		
+
 		try{
-			$res = Movie::destroy($id);
-			if ($res)
+
+			//to get the array of photos of the movie
+			$photos = Movie::find($id)->photos;
+			$res['photos'] = true;
+
+			foreach ($photos as $photo) {
+				$file = public_path($photo->location).'\\'.$photo->file_name;
+				if ( File::exists($file)) {
+					
+					if(File::delete($file)){//delete the file from the folder
+						$res['photos'] = $res['photos'] && $photo->delete(); //delete the file from database
+					}
+
+				}				
+			}
+
+
+			
+			//to get thumbnail of the movie to be deleted. in Movie model, there is function called thumbnail
+			$thumbnail = Movie::find($id)->thumbnail;
+
+
+			$file = public_path($thumbnail->location).'\\'.$thumbnail->file_name;
+
+			//delete movie from database
+			$res['movie'] = Movie::destroy($id);
+
+			//test if the thumbnail file exists or not
+			if ( File::exists($file)) {
+				//delete the file from the folder
+			   if(File::delete($file)){
+			   		//delete the thumbnail of the movie from database;
+					$res['thumbnail'] = $thumbnail->delete();
+			   }
+			}
+			
+			if ($res['movie'] )
 				return [1];
 			else
 				return [0];
@@ -152,7 +227,9 @@ EOF;
 
 	public function getmovie(){
 		//$movies = Movie::select(['mID', 'title', 'director', 'year']);
-		$movies = Movie::select(['movie.mID', DB::raw(" if(length(title)<40, title, concat(subString(title,1,40),'...' ) )  as title"), 'director', 'year', DB::raw("AVG(stars) as avgstars")])->leftJoin('rating', 'movie.mID', '=', 'rating.mID')
+		$movies = Movie::select(['movie.mID', 'title', 'director', 'year', DB::raw("AVG(stars) as avgstars"), 'image.file_name', 'image.location'])
+		->leftJoin('rating', 'movie.mID', '=', 'rating.mID')
+		->leftJoin('image','thumbnail_id', '=', 'image.image_id')
         ->groupBy('movie.mID');;
 
         return Datatables::of($movies)

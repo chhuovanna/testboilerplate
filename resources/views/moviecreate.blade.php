@@ -3,7 +3,7 @@
 @section('title', 'Add movie')
 
 @section('content')
-{{ html()->form('POST', route('movie.store'))->class('form-horizontal')->open() }}
+{{ html()->form('POST', route('movie.store'))->class('form-horizontal')->acceptsFiles()->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">

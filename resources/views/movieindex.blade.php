@@ -23,6 +23,8 @@
 
                                 <th>Id</th>
 
+                                <th>Photo</th>
+
                                 <th>Title</th>
 
                                 <th>Director</th>
@@ -61,18 +63,32 @@ $(document).ready(function() {
 
             {data: 'mID', name: 'mID'},
 
-            {data: 'title', name: 'title'},
+            {data: 'file_name', name: 'image',orderable: false, searchable: false,
+                render:function ( data, type, row, meta ) {
+                    if (data){
+                        var source = "{{ asset('images/thumbnail') }}"+"/"+data;
+                        return '<img src="'+source+'" height="42" width="42">';
+                    }else{
+                        return '<i class="fa fa-film fa-3x" aria-hidden="true"></i>';
+                    }
+                }
+            },
+
+            {data: 'title', name: 'title',
+                render:function ( data, type, row ) {
+                    return type === 'display' && data && data.length > 50 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
+                }
+            },
 
             {data: 'director', name: 'director',
                 render:function ( data, type, row ) {
-                    return type === 'display' && data && data.length > 20 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
+                    return type === 'display' && data && data.length > 50 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
                 }
             },
 
             {data: 'year', name: 'year'},
             {data:'avgstars', name:'avgstars'},
-
-           {data:'action', name: 'action', orderable: false, searchable: false},
+            {data:'action', name: 'action', orderable: false, searchable: false},
         
 
         ],
