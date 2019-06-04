@@ -243,4 +243,13 @@ EOF;
         				->make(true);
 	}
 
+	public function getphotos(Request $request){
+		$mid = $request->get('mID');
+		$photos = Movie::find($mid)->photos;
+		if (sizeof($photos) > 0){
+			return [1, $photos];
+		}else
+			return [0];
+	}
+
 }

@@ -67,7 +67,7 @@ $(document).ready(function() {
                 render:function ( data, type, row, meta ) {
                     if (data){
                         var source = "{{ asset('images/thumbnail') }}"+"/"+data;
-                        return '<img src="'+source+'" height="42" width="42">';
+                        return '<img src="'+source+'" height="42" width="42" class="thumbnail" data-id="'+row.mID+'">';
                     }else{
                         return '<i class="fa fa-film fa-3x" aria-hidden="true"></i>';
                     }
@@ -123,6 +123,52 @@ $(document).ready(function() {
                     }
             }); 
         }
+        
+   });
+
+
+    $(document).off('click','.thumbnail');
+    $(document).on('click','.thumbnail' , function(){
+
+       // alert( $(this).data('id'));
+            $.ajax({
+                    type:"GET",
+                    url:"movie/getphotos",
+                    data:{ mID: $(this).data('id')},    
+                    success: function (data) {
+                        if(data[0] == 1){
+                            var i;
+                            var html = "";
+                            var source = "";
+                            var eleclass = "";
+                            for (i=0; i< data[1].length ; i++){
+                                source = "{{asset('images/photos')}}" + "/" + data[1][i].file_name;
+                                if (i==0)
+                                    eleclass="class='start'";
+                                else
+                                    eleclass = "";
+                                html = html+ "<a href='" + source+ "' " + eleclass + " ><img src='" + source+"' height='40' width='40' ></a>";
+                            }
+
+                            html = "<div id='lightgallery'>" + html + "</div>";
+                            $('.col').append(html);
+                            var $lg = $("#lightgallery");
+                            $lg.lightGallery({
+                                mode: 'lg-slide',
+                            }); 
+                            $lg.on('onCloseAfter.lg', function (event){
+                                $(this).data('lightGallery').destroy(true);
+                                $('#lightgallery').remove();
+                            });
+                            $('.start').click();
+                            console.log(html);
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+            }); 
+
         
    });
 });
