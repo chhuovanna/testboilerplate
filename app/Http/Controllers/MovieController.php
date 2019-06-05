@@ -126,20 +126,24 @@ class MovieController extends Controller
 			//to get thumbnail of the movie to be deleted. in Movie model, there is function called thumbnail
 			$thumbnail = Movie::find($id)->thumbnail;
 
-
-			$file = public_path($thumbnail->location).'\\'.$thumbnail->file_name;
-
 			//delete movie from database
 			$res['movie'] = Movie::destroy($id);
+			if ($thumbnail){
+				$file = public_path($thumbnail->location).'\\'.$thumbnail->file_name;
 
-			//test if the thumbnail file exists or not
-			if ( File::exists($file)) {
-				//delete the file from the folder
-			   if(File::delete($file)){
-			   		//delete the thumbnail of the movie from database;
-					$res['thumbnail'] = $thumbnail->delete();
-			   }
+			
+
+				//test if the thumbnail file exists or not
+				if ( File::exists($file)) {
+					//delete the file from the folder
+				   if(File::delete($file)){
+				   		//delete the thumbnail of the movie from database;
+						$res['thumbnail'] = $thumbnail->delete();
+				   }
+				}
+				
 			}
+
 			
 			if ($res['movie'] )
 				return [1];
@@ -227,10 +231,10 @@ EOF;
 
 	public function getmovie(){
 		//$movies = Movie::select(['mID', 'title', 'director', 'year']);
-		$movies = Movie::select(['movie.mID', 'title', 'director', 'year', DB::raw("AVG(stars) as avgstars"), 'image.file_name', 'image.location'])
-		->leftJoin('rating', 'movie.mID', '=', 'rating.mID')
+		$movies = Movie::select(['movie.mID', 'title', 'director', 'year', 'avgstars', 'image.file_name', 'image.location'])
+		->leftJoin(DB::raw('(select mID, avg(stars) as avgstars from rating group by mID) as temp'), 'temp.mID','movie.mID')
 		->leftJoin('image','thumbnail_id', '=', 'image.image_id')
-        ->groupBy('movie.mID');;
+        ;
 
         return Datatables::of($movies)
         				->addColumn('action', function ($movie) {
