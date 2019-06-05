@@ -1,3 +1,5 @@
+
+
 @extends('backend.layouts.app')
 
 @section('title', app_name() . ' | ' . __('strings.backend.dashboard.title'))
@@ -154,7 +156,7 @@ $(document).ready(function() {
                             $('.col').append(html);
                             var $lg = $("#lightgallery");
                             $lg.lightGallery({
-                                mode: 'lg-slide',
+                                mode: 'lg-slide-circular', 
                             }); 
                             $lg.on('onCloseAfter.lg', function (event){
                                 $(this).data('lightGallery').destroy(true);
@@ -174,5 +176,13 @@ $(document).ready(function() {
 });
 </script>
 
+@endpush
+
+@push('after-styles')
+<style type="text/css"> 
+    .lg-backdrop.in {
+     opacity: 0.5 !important; 
+}
+</style>
 @endpush
 
