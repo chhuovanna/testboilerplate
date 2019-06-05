@@ -245,9 +245,34 @@ EOF;
 
 	public function getphotos(Request $request){
 		$mid = $request->get('mID');
+
+		//get the list of photos of movie using relationship defined in model
 		$photos = Movie::find($mid)->photos;
 		if (sizeof($photos) > 0){
-			return [1, $photos];
+
+			$html = "";
+            $source = "";
+            $eleclass = "";
+            $i=0;
+            foreach ($photos as $photo) {
+                
+                //get url of each photo        
+                $source = asset(str_replace('\\','/',$photo->location)) . "/" . $photo->file_name;
+                if ($i==0){
+                	//set class start to the first photo, so we can use js to click it 
+                    $eleclass = "class='start'";
+                    $i = 1;
+                }
+                else
+                    $eleclass = "";
+                //html code for each photo html element
+                $html .=  "<a href='" . $source . "' " . $eleclass . " ><img src='" . $source ."' height='40' width='40' ></a>";
+
+            }
+
+            //list of photos must be in the dive with id lightgallery, so in view we can apply the lightgallery library on it
+            $html = "<div id='lightgallery'>" . $html . "</div>";
+			return [1, $html];
 		}else
 			return [0];
 	}

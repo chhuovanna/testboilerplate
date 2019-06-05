@@ -139,31 +139,25 @@ $(document).ready(function() {
                     data:{ mID: $(this).data('id')},    
                     success: function (data) {
                         if(data[0] == 1){
-                            var i;
-                            var html = "";
-                            var source = "";
-                            var eleclass = "";
-                            for (i=0; i< data[1].length ; i++){
-                                source = "{{asset('images/photos')}}" + "/" + data[1][i].file_name;
-                                if (i==0)
-                                    eleclass="class='start'";
-                                else
-                                    eleclass = "";
-                                html = html+ "<a href='" + source+ "' " + eleclass + " ><img src='" + source+"' height='40' width='40' ></a>";
-                            }
+                           
+                            $('.col').append(data[1]); //insert list of photos for viewing
 
-                            html = "<div id='lightgallery'>" + html + "</div>";
-                            $('.col').append(html);
                             var $lg = $("#lightgallery");
+
+                            //apply the lightgallery to the list of photos
                             $lg.lightGallery({
                                 mode: 'lg-slide-circular', 
                             }); 
+
+                            //after closing the photo viewer, delete the list of photos
                             $lg.on('onCloseAfter.lg', function (event){
                                 $(this).data('lightGallery').destroy(true);
                                 $('#lightgallery').remove();
                             });
+
+                            //automatically click on the first photo for viewing
                             $('.start').click();
-                            console.log(html);
+                            console.log(data[1]);
                         }
                     },
                     error: function(data){
