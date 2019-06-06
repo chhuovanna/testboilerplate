@@ -69,7 +69,7 @@ $(document).ready(function() {
                 render:function ( data, type, row, meta ) {
                     if (data){
                         var source = "{{ asset('images/thumbnail') }}"+"/"+data;
-                        return '<img src="'+source+'" height="42" width="42" class="thumbnail" data-id="'+row.mID+'">';
+                        return '<img src="'+source+'"  width="70px" class="thumbnail img-thumbnail" data-id="'+row.mID+'" style="cursor:pointer">';
                     }else{
                         return '<i class="fa fa-film fa-3x" aria-hidden="true"></i>';
                     }
@@ -78,13 +78,13 @@ $(document).ready(function() {
 
             {data: 'title', name: 'title',
                 render:function ( data, type, row ) {
-                    return type === 'display' && data && data.length > 50 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
+                    return type === 'display' && data && data.length > 20 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
                 }
             },
 
             {data: 'director', name: 'director',
                 render:function ( data, type, row ) {
-                    return type === 'display' && data && data.length > 50 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
+                    return type === 'display' && data && data.length > 20 ? '<span title="'+data+'">'+data.substr( 0, 20 )+'...</span>' : data; 
                 }
             },
 
@@ -147,6 +147,7 @@ $(document).ready(function() {
                             //apply the lightgallery to the list of photos
                             $lg.lightGallery({
                                 mode: 'lg-slide-circular', 
+                                mousewheel:true,
                             }); 
 
                             //after closing the photo viewer, delete the list of photos
@@ -157,7 +158,7 @@ $(document).ready(function() {
 
                             //automatically click on the first photo for viewing
                             $('.start').click();
-                            console.log(data[1]);
+                            //console.log(data[1]);
                         }
                     },
                     error: function(data){

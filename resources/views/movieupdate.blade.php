@@ -3,7 +3,7 @@
 @section('title', 'Update movie')
 
 @section('content')
-{{ html()->form('PUT', route('movie.update',['id'=>$movie->mID]))->class('form-horizontal')->open() }}
+{{ html()->form('PUT', route('movie.update',['id'=>$movie->mID]))->class('form-horizontal')->acceptsFiles()->open() }}
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -37,7 +37,13 @@
 @push('after-scripts')
 
 <script>
- 
+    $(document).ready(function(){
+        $(document).off('change','#thumbnail_id');
+        $(document).on('change','#thumbnail_id', function(){
+            $('.old-thumbnail').remove();
+        });
+
+    });
 </script>
 
 @endpush

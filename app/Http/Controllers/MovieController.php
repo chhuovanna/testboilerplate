@@ -81,7 +81,7 @@ class MovieController extends Controller
 		echo 'showlalal';
 	}
 	public function edit($id) {
-		$movie = Movie::find($id);
+		$movie = Movie::with('thumbnail')->with('photos')->find($id);
 		return view('movieupdate',['movie'=>$movie]);
 	}
 	public function update(Request $request, $id) {
@@ -90,8 +90,100 @@ class MovieController extends Controller
 		$movie->title = $request->get('title');
 		$movie->year = $request->get('year');
 		$movie->director = $request->get('director');
-		try{
-			$movie->save();
+
+		$validateData = $request->validate([
+			'thumbnail_id' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+			,'photos[]' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048']);
+
+		
+		try {
+
+			// test if thumbnail is updated or not
+			if($request->hasFile('thumbnail_id')){
+				$file = $request->file('thumbnail_id');
+				$thumbnail = new Image();
+				$thumbnail->file_name = rand(1111,9999).time().'.'.$file->getClientOriginalExtension();
+				$thumbnail->location = 'images\thumbnail'; 
+				
+				$file->move(public_path($thumbnail->location),$thumbnail->file_name);
+				$thumbnail->save();//save new thumbnail
+
+
+				$old_thumbnail = $movie->thumbnail; // Keep the old thumbnail for removing if it exists
+				$movie->thumbnail_id = $thumbnail->image_id;	//change the thumbnail to the new one
+
+
+			}
+
+
+
+			$movie->save(); //save the update of movie
+			
+			if(isset($old_thumbnail)){
+				//remove old thumbnail from harddisk
+				$file = public_path($movie->thumbnail->location).'\\'.$movie->thumbnail->file_name;
+				if ( File::exists($file)) {
+					File::delete($file);
+				}
+
+				$movie->thumbnail->delete(); //delete the old thumbnail if user add a new one
+			}
+
+
+
+			$db_old_photos = $movie->photos;//get old photos from db
+			if($db_old_photos){// if there is any old photos in db
+				$old_photos = $request->get('old_photos'); //get the list of old photos after use update
+				
+
+				foreach($db_old_photos as $db_old_photo){
+
+					//test if user has deleted all old photos, we remove it from db and hard disk
+					//or test if some old photos are deleted by user, we remove it form db and hard disk
+					if (!$old_photos or ($old_photos && !in_array($db_old_photo->image_id, $old_photos))){
+
+						if($db_old_photo->delete()){
+							//remove old thumbnail from harddisk
+							$file = public_path($db_old_photo->location).'\\'.$db_old_photo->file_name;
+							if ( File::exists($file)) {
+								File::delete($file);
+							}
+						}
+					}
+				}
+			}
+
+
+			
+
+			//test if user has upload other photos or not
+			if($request->hasFile('photos')){
+
+
+
+				//get the array of photos
+				$photos = $request->file('photos');
+
+
+
+				foreach ($photos as $file) {
+					$photo = new Image();
+					$photo->file_name = rand(1111,9999).time().'.'.$file->getClientOriginalExtension();
+
+					//photos are stored on server in folder public/images/photos
+					$photo->location = 'images\photos';
+					
+					//photo belongs to movie
+					$photo->mID = $request->get('mid');
+					$photo->save();
+					$file->move(public_path($photo->location),$photo->file_name);
+					
+
+				}
+			}
+
+
+
 			return redirect()->route('movie.index')->withFlashSuccess('Movie is updated');
 		}catch(\Exception $e){
 			return redirect()
@@ -250,6 +342,7 @@ EOF;
 	public function getphotos(Request $request){
 		$mid = $request->get('mID');
 
+		$thumbnail = Movie::find($mid)->thumbnail;
 		//get the list of photos of movie using relationship defined in model
 		$photos = Movie::find($mid)->photos;
 		if (sizeof($photos) > 0){
@@ -274,7 +367,11 @@ EOF;
 
             }
 
-            //list of photos must be in the dive with id lightgallery, so in view we can apply the lightgallery library on it
+            $source = $source = asset(str_replace('\\','/',$thumbnail->location)) . "/" . $thumbnail->file_name;
+            //add thumbnail to the list too
+            $html .="<a href='" . $source . "'  ><img src='" . $source ."' height='40' width='40' ></a>";
+
+            //list of photos must be in the div with id lightgallery, so in view we can apply the lightgallery library on it
             $html = "<div id='lightgallery'>" . $html . "</div>";
 			return [1, $html];
 		}else

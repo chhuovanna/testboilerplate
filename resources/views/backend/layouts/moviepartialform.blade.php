@@ -4,6 +4,17 @@
         $title = $movie->title;
         $year = $movie->year;
         $director = $movie->director;
+        
+        if(isset($movie->thumbnail)){
+            $source = asset(str_replace('\\','/',$movie->thumbnail->location)) . "/" . $movie->thumbnail->file_name;
+        }
+        
+
+        if(isset($movie->photos)){
+            foreach($movie->photos as $photo){
+                $photos_source[$photo->image_id] = asset(str_replace('\\','/',$photo->location)) . "/" . $photo->file_name;
+            }
+        }
     }else{
         $mid = null;
         $title = null;
@@ -70,16 +81,29 @@
                 ->class('col-md-2 form-control-label')
                 ->for('thumbnail_id') }}
 
+
             <div class="col-md-3">
-
-
             {{ html()->input('file','thumbnail_id')
                     ->class('form-control')
                     ->placeholder('Thumbnail')
-                    ->required()
+                    
                 }}
+                
 
-            </div><!--col-->
+           </div>
+           @if(isset($source))
+
+           <div class="old-thumbnail">
+
+                <div class="alert alert-primary alert-dismissible fade show" role="alert" >
+                    <input type="hidden" name="old_thumbnail" value="1">
+                  <img src="{{$source}}"  class="img-thumbnail" width="100px" height="100px">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            </div>
+            @endif
         </div><!--form-group-->
 
         <div class="form-group row">
@@ -98,6 +122,22 @@
                     }}
 
             </div><!--col-->
+
+            @if(isset($photos_source))
+
+           <div class="old-photo">
+                @foreach ($photos_source as $image_id => $photo_source)
+                <div class="alert alert-primary alert-dismissible fade show" role="alert" >
+                    <input type="hidden" name="old_photos[]" value={{$image_id}}>
+                  <img src="{{$photo_source}}"  class="img-thumbnail" width="100px" height="100px">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                @endforeach
+            </div>
+            @endif
+
         </div><!--form-group-->
     </div><!--col-->
 </div><!--row-->
