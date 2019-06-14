@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "090725279efefd0fa1e14dd385d2c5e2",
+    "content-hash": "04f105d11b53362d86d0ea2ca28b80fc",
     "packages": [
         {
             "name": "appstract/laravel-blade-directives",

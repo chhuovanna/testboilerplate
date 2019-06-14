@@ -378,4 +378,75 @@ EOF;
 			return [0];
 	}
 
+	public function home(){
+
+		$movies = Movie::getMoviesWithThumbnail();
+		return view('frontend.index',['movies'=>$movies]);
+	}
+
+	public function getmoviemore(Request $request){
+
+		$movies = Movie::getMoviesWithThumbnail($request->get('offset'));
+
+		if(sizeof($movies) > 0){
+			$html = "";
+			foreach ($movies as $movie){
+				$html .= <<<eot
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+eot;
+							if($movie->file_name){
+								$html .= <<<eot
+							
+							<img src="asset($movie->location)/$movie->file_name" alt="IMG-PRODUCT">
+eot;
+							}else{
+								$html .= <<<eot
+
+							<img src="asset('images/thumbnail')/default.png" alt="IMG-PRODUCT">
+eot;
+							}
+							$html .= <<<eot
+							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Quick View
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									$movie->title
+								</a>
+
+								<span class="stext-105 cl3">
+									$movie->year
+								</span>
+
+								<span class="stext-105 cl3">
+									$movie->director
+								</span>
+							</div>
+
+ 							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="{{asset('cozastore')}}/images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{asset('cozastore')}}/images/icons/icon-heart-02.png" alt="ICON">
+								</a>
+							</div>
+ 						</div>
+					</div>
+				</div>
+eot;
+			}
+				
+
+
+			return [1,$html];
+		}
+		else
+			return [0];
+	}
+
 }

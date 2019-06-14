@@ -22,4 +22,13 @@ class movie extends Model
     	return $this->belongsTo('App\image','thumbnail_id','image_id');
     }
 
+    public static function getMoviesWithThumbnail($offset=0){
+        $movies = Movie::select(['movie.mID', 'title', 'director', 'year', 'image.file_name', 'image.location'])
+        ->leftJoin('image','thumbnail_id', '=', 'image.image_id')->orderBy('movie.mID','desc')->offset($offset)
+                ->limit(20)->get();
+
+        return $movies;
+
+    }
+
 }

@@ -35,14 +35,18 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
 });
 
 
-Route::get('admin/movie/rate','MovieController@getform')->name('movie.rate');
-Route::post('admin/movie/saverating','MovieController@saverating');
-Route::get('admin/movie/showrate','MovieController@showrate')->name('movie.showrate');
-Route::get('admin/movie/getrating','MovieController@getrating');
-Route::get('admin/movie/getmovie', 'MovieController@getmovie')->name('movie.getmovie');
+Route::get('admin/movie/rate','MovieController@getform')->name('movie.rate')->middleware('auth');
+Route::post('admin/movie/saverating','MovieController@saverating')->middleware('auth');
+Route::get('admin/movie/showrate','MovieController@showrate')->name('movie.showrate')->middleware('auth');
+Route::get('admin/movie/getrating','MovieController@getrating')->middleware('auth');
+Route::get('admin/movie/getmovie', 'MovieController@getmovie')->name('movie.getmovie')->middleware('auth');
+Route::get('admin/movie/getmoviemore', 'MovieController@getmoviemore');
 Route::get('admin/movie/getphotos','MovieController@getphotos');
+Route::get('admin/test', 'UpdatePasswordController@update');
 
-Route::resource('admin/movie','MovieController');
-Route::resource('admin/reviewer','ReviewerController');
+
+
+Route::resource('admin/movie','MovieController')->middleware('auth');
+Route::resource('admin/reviewer','ReviewerController')->middleware('auth');
 
 
