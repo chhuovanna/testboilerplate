@@ -286,20 +286,33 @@
     
     $(document).off('click','#loadmore');
     $(document).on('click', '#loadmore', function(){
-        alert('iam here');
+        //alert('iam here');
         var offset = $('#offset').val();
         $.ajax({
                     type:"GET",
-                    url:"movie/getmoviemore",
-                    data:{ offset: offset,    
+                    url:"admin/movie/getmoviemore",
+                    data:{ offset: offset }   ,
                     success: function (data) {
+                        console.log(data);
                         if(data[0] == 1){
-
-                
-
-                            $('.isotope-grid').append(data[1]); //insert list of photos for viewing
-
-
+                            $('.isotope-grid').append(data[1]);
+                            //$('.isotope-grid').isotope('appended', $(data[1]));
+                            /*var i;
+                            var items = data[1];
+                            for (i=0; i< items.length; i ++){
+                                $('.isotope-grid').isotope('appended', $(items[i]));
+                            }*/
+                            var $grid = $topeContainer.each(function () {
+                                $(this).isotope({
+                                    itemSelector: '.isotope-item',
+                                    layoutMode: 'fitRows',
+                                    percentPosition: true,
+                                    animationEngine : 'best-available',
+                                    masonry: {
+                                        columnWidth: '.isotope-item'
+                                    }
+                                });
+                            });
                             $('#offset').val(offset+20);
                         }
                     },

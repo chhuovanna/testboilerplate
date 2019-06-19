@@ -389,8 +389,11 @@ EOF;
 		$movies = Movie::getMoviesWithThumbnail($request->get('offset'));
 
 		if(sizeof($movies) > 0){
+			//$items = array();
 			$html = "";
+			
 			foreach ($movies as $movie){
+				//$html = "";
 				$html .= <<<eot
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
@@ -398,16 +401,19 @@ EOF;
 						<div class="block2-pic hov-img0">
 eot;
 							if($movie->file_name){
+								$location = asset($movie->location);
 								$html .= <<<eot
 							
-							<img src="asset($movie->location)/$movie->file_name" alt="IMG-PRODUCT">
+							<img src="$location/$movie->file_name" alt="IMG-PRODUCT">
 eot;
 							}else{
+								$location = asset('images/thumbnail');
 								$html .= <<<eot
 
-							<img src="asset('images/thumbnail')/default.png" alt="IMG-PRODUCT">
+							<img src="$location/default.png" alt="IMG-PRODUCT">
 eot;
 							}
+							$location = asset('cozastore');
 							$html .= <<<eot
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
@@ -431,19 +437,20 @@ eot;
 
  							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="{{asset('cozastore')}}/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{asset('cozastore')}}/images/icons/icon-heart-02.png" alt="ICON">
+									<img class="icon-heart1 dis-block trans-04" src="$location/images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="$location/images/icons/icon-heart-02.png" alt="ICON">
 								</a>
 							</div>
  						</div>
 					</div>
 				</div>
 eot;
+				//$items[] = $html;
 			}
 				
 
-
 			return [1,$html];
+			//return [1,$items];
 		}
 		else
 			return [0];
