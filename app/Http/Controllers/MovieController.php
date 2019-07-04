@@ -323,9 +323,10 @@ EOF;
 
 	public function getmovie(){
 		//$movies = Movie::select(['mID', 'title', 'director', 'year']);
-		$movies = Movie::select(['movie.mID', 'title', 'director', 'year', 'avgstars', 'image.file_name', 'image.location'])
-		->leftJoin(DB::raw('(select mID, avg(stars) as avgstars from rating group by mID) as temp'), 'temp.mID','movie.mID')
-		->leftJoin('image','thumbnail_id', '=', 'image.image_id')
+		$movies = Movie::select(['movie.mID', 'title', 'director', 'year', 'avgstars', 'temp1.file_name', 'temp1.location'])
+		->leftJoin(DB::raw('(select rating.mID as movie, avg(stars) as avgstars from rating group by movie) as temp'), 'temp.movie','movie.mID')
+		//->leftJoin('image', 'image.image_id','=', 'movie.thumbnail_id')
+		->leftJoin(DB::raw('(select image_id, location, file_name from image) as temp1'), 'temp1.image_id', 'movie.thumbnail_id')
         ;
 
         return Datatables::of($movies)
@@ -389,11 +390,10 @@ EOF;
 		$movies = Movie::getMoviesWithThumbnail($request->get('offset'));
 
 		if(sizeof($movies) > 0){
-			//$items = array();
-			$html = "";
+			$items = array();
 			
 			foreach ($movies as $movie){
-				//$html = "";
+				$html = "";
 				$html .= <<<eot
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
@@ -445,12 +445,12 @@ eot;
 					</div>
 				</div>
 eot;
-				//$items[] = $html;
+				$items[] = $html;
 			}
 				
 
-			return [1,$html];
-			//return [1,$items];
+			//return [1,$html];
+			return [1,$items];
 		}
 		else
 			return [0];

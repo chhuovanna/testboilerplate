@@ -286,43 +286,33 @@
     
     $(document).off('click','#loadmore');
     $(document).on('click', '#loadmore', function(){
-        //alert('iam here');
-        var offset = $('#offset').val();
+           
+        var offset = parseInt($('#offset').val());
+        offset = offset + 20;
+        //alert(offset);
         $.ajax({
                     type:"GET",
                     url:"admin/movie/getmoviemore",
-                    data:{ offset: offset }   ,
+                    data:{ offset: offset  }   ,
                     success: function (data) {
                         console.log(data);
                         if(data[0] == 1){
-                            $('.isotope-grid').append(data[1]);
-                            //$('.isotope-grid').isotope('appended', $(data[1]));
-                            /*var i;
+                            var i;
                             var items = data[1];
+                            var $content;
                             for (i=0; i< items.length; i ++){
-                                $('.isotope-grid').isotope('appended', $(items[i]));
-                            }*/
-                            var $grid = $topeContainer.each(function () {
-                                $(this).isotope({
-                                    itemSelector: '.isotope-item',
-                                    layoutMode: 'fitRows',
-                                    percentPosition: true,
-                                    animationEngine : 'best-available',
-                                    masonry: {
-                                        columnWidth: '.isotope-item'
-                                    }
-                                });
-                            });
-                            $('#offset').val(offset+20);
+                                $content = $(items[i]);
+                                $('.isotope-grid').append( $content ).isotope( 'appended', $content );
+                            }
+                            $('#offset').val(offset);
                         }
                     },
                     error: function(data){
                         console.log(data);
                     }
             }); 
+    
     });
-
-
 
 
 })(jQuery);

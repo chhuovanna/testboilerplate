@@ -25,8 +25,8 @@ class RatingTableSeeder extends Seeder
         
         for($i=0; $i<100 ; $i++){
         	$stars = mt_rand(1, 5);
-        	$offsetmovie = mt_rand(0, 54);
-        	$offsetreviewer = mt_rand(0, 18);
+        	$offsetmovie = mt_rand(0, 770);
+        	$offsetreviewer = mt_rand(0, 80);
         	
 
         	$randmovie = DB::table('movie')
