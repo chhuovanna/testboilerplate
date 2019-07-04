@@ -268,6 +268,7 @@
     
     /*==================================================================
     [ Show modal1 ]*/
+/*
     $('.js-show-modal1').on('click',function(e){
         e.preventDefault();
         $('.js-modal1').addClass('show-modal1');
@@ -277,6 +278,42 @@
         $('.js-modal1').removeClass('show-modal1');
     });
 
+*/
+
+    //added by vanna
+
+    $(document).off('click', '.js-show-modal1');
+    $(document).on('click', '.js-show-modal1',function(e){
+        alert($(this).data('mid'));
+        $.ajax({
+            type:"GET",
+            url:"admin/movie/getmoviedetail",
+            data:{ mid:$(this).data('mid')  }   ,
+            success: function (data) {
+                console.log(data);
+/*                if(data[0] == 1){
+                    var i;
+                    var items = data[1];
+                    var $content;
+                    for (i=0; i< items.length; i ++){
+                        $content = $(items[i]);
+                        $('.isotope-grid').append( $content ).isotope( 'appended', $content );
+                    }
+                    $('#offset').val(offset);
+                }
+*/            },
+            error: function(data){
+                console.log(data);
+            }
+    
+    });
+        $('.js-modal1').addClass('show-modal1');
+    });
+
+    $(document).off('click','.js-hide-modal1');
+    $(document).on('click','.js-hide-modal1',function(){
+        $('.js-modal1').removeClass('show-modal1');
+    });
 
 
     //added by vanna

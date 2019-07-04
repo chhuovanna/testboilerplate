@@ -756,7 +756,7 @@
 							@else
 							<img src="{{asset('images/thumbnail')}}/default.png" alt="IMG-PRODUCT">
 							@endif
-							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-mid="{{$movie->mID}}">
 								Quick View
 							</a>
 						</div>
@@ -794,7 +794,7 @@
 			<div class="flex-c-m flex-w w-full p-t-45">
 				<input id="offset" value="0" type='hidden'>
 				<a href="javascript:void(0);" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" id="loadmore">
-					Load More
+					Load More1
 				</a>
 			</div>
 			
@@ -973,7 +973,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="{{asset('cozastore')}}/images/product-detail-01.jpg">
+									<!-- <div class="item-slick3" data-thumb="{{asset('cozastore')}}/images/product-detail-01.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="{{asset('cozastore')}}/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
@@ -1001,14 +1001,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
 					</div>
 					
 					<div class="col-md-6 col-lg-5 p-b-30">
-						<div class="p-r-50 p-t-5 p-lr-0-lg">
+						<!-- <div class="p-r-50 p-t-5 p-lr-0-lg"> -->
+						<!-- <div class="p-r-50 p-t-5 p-lr-0-lg detail-text">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								Lightweight Jacket
 							</h4>
@@ -1048,7 +1049,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							<p class="stext-102 cl3 p-t-23">
 								<b>Instant Message:</b> seller (kakao)
 							</p>
-							
+						 -->	
 
 							<!--  -->
 							<!-- <div class="p-t-33">

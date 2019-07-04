@@ -42,6 +42,7 @@ Route::get('admin/movie/getrating','MovieController@getrating')->middleware('aut
 Route::get('admin/movie/getmovie', 'MovieController@getmovie')->name('movie.getmovie')->middleware('auth');
 Route::get('admin/movie/getmoviemore', 'MovieController@getmoviemore');
 Route::get('admin/movie/getphotos','MovieController@getphotos');
+Route::get('admin/movie/getmoviedetail','MovieController@getmoviedetail');
 Route::get('admin/test', 'UpdatePasswordController@update');
 
 
