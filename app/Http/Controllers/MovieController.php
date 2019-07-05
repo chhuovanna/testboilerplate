@@ -458,6 +458,21 @@ eot;
 
 	public function getmoviedetail(Request $request){
 		$movie = Movie::with('photos')->with('thumbnail')->find($request->get('mid'));
-		return $movie;
+		if(isset($movie->thumbnail)){
+			$location = asset(str_replace('\\','/',$movie->thumbnail->location));
+			$movie->thumbnail->location = $location;
+		}else{
+			$movie->thumbnail_id = asset('images/thumbnail').'/default.png';
+		}
+
+		if(isset($movie->photos)){
+			$size = sizeof($movie->photos);
+			for($i = 0 ; $i < $size; $i ++){
+				$location = asset(str_replace('\\','/',$movie->photos[$i]->location));
+				$movie->photos[$i]->location = $location;
+			}
+			
+		}
+		return [1,$movie];
 	}
 }

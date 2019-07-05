@@ -973,7 +973,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<!-- <div class="item-slick3" data-thumb="{{asset('cozastore')}}/images/product-detail-01.jpg">
+									 <!-- <div id='to-be-hide' class="item-slick3" data-thumb="{{asset('cozastore')}}/images/product-detail-01.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="{{asset('cozastore')}}/images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
@@ -981,9 +981,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
-									</div>
+									</div> -->
 
-									<div class="item-slick3" data-thumb="{{asset('cozastore')}}/images/product-detail-02.jpg">
+									<!--<div class="item-slick3" data-thumb="{{asset('cozastore')}}/images/product-detail-02.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="{{asset('cozastore')}}/images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
@@ -1009,8 +1009,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<!-- <div class="p-r-50 p-t-5 p-lr-0-lg"> -->
-						<!-- <div class="p-r-50 p-t-5 p-lr-0-lg detail-text">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
+						 <div class="p-r-50 p-t-5 p-lr-0-lg detail-text">
+						<!--	<h4 class="mtext-105 cl2 js-name-detail p-b-14">
 								Lightweight Jacket
 							</h4>
 
@@ -1170,7 +1170,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--===============================================================================================-->
 	<script src="{{asset('cozastore')}}/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 	<script>
-		$('.gallery-lb').each(function() { // the containers for all your galleries
+		/*$('.gallery-lb').each(function() { // the containers for all your galleries
 			$(this).magnificPopup({
 		        delegate: 'a', // the selector for gallery item
 		        type: 'image',
@@ -1179,7 +1179,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		        },
 		        mainClass: 'mfp-fade'
 		    });
-		});
+		});*/
 	</script>
 <!--===============================================================================================-->
 	<script src="{{asset('cozastore')}}/vendor/isotope/isotope.pkgd.min.js"></script>

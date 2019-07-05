@@ -284,35 +284,117 @@
 
     $(document).off('click', '.js-show-modal1');
     $(document).on('click', '.js-show-modal1',function(e){
-        alert($(this).data('mid'));
+        //alert($(this).data('mid'));
         $.ajax({
             type:"GET",
             url:"admin/movie/getmoviedetail",
             data:{ mid:$(this).data('mid')  }   ,
             success: function (data) {
                 console.log(data);
-/*                if(data[0] == 1){
+                if(data[0] == 1){
+                    var gl_container = $('.gallery-lb');
+                    var text_container = $('.detail-text');
+                    var movie = data[1];
+                    var location;
+                    var html = "";
+                    var size;
                     var i;
-                    var items = data[1];
-                    var $content;
-                    for (i=0; i< items.length; i ++){
-                        $content = $(items[i]);
-                        $('.isotope-grid').append( $content ).isotope( 'appended', $content );
+                    var temp;
+                    
+
+                    if (movie['photos'] !== 'undefined'){
+                        alert('hter');
+                        size = movie['photos'].length;
+                        for (i = 0; i< size ; i++){
+                            location = movie['photos'][i]['location']+'\\'+movie['photos'][i]['file_name'];
+                            html = '<div class="item-slick3" data-thumb="'+location+'">';
+                            html = html + '<div class="wrap-pic-w pos-relative">';
+                            html = html + '<img src="'+location+'" alt="IMG-PRODUCT">';
+                            html = html + '<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'
+                                        +location+'">';
+                            html = html + '<i class="fa fa-expand"></i></a></div></div>';
+                            
+                        }
+                        gl_container.prepend(html);
+                        html = "";
                     }
-                    $('#offset').val(offset);
+
+
+                    if (movie['thumbnail'] !== 'undefined'){
+                        location = movie['thumbnail']['location']+'\\'+movie['thumbnail']['file_name'];
+                        
+                    }else{
+                        location = movie['thumbnail_id'];
+                    }
+
+                    html = '<div class="item-slick3" data-thumb="'+location+'">';
+                    html = html + '<div class="wrap-pic-w pos-relative">';
+                    html = html + '<img src="'+location+'" alt="IMG-PRODUCT">';
+                    html = html + '<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'
+                                +location+'">';
+                    html = html + '<i class="fa fa-expand"></i></a></div></div>';
+                    gl_container.prepend(html);
+                    html = "";
+
+                    html = '<h4 class="mtext-105 cl2 js-name-detail p-b-14">'+movie.title+'</h4>';
+                    html = html + '<span class="mtext-106 cl2">'+movie.year+'</span>';
+                    html = html + '<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.</p>';
+                    html = html + '<p class="stext-102 cl3 p-t-23"><b>Category:</b> <a href="javascript:void(0);">'
+                            +movie.director+'</a></p>';
+                    html = html 
+                            +'<p class="stext-102 cl3 p-t-23">'
+                             +   '<b>Pick up address:</b> 12, sangkat Phnom penh, kan phnom penh, city phnom penh'
+                            +'</p>'
+
+
+                            +'<p class="stext-102 cl3 p-t-23">'
+                             +   '<b>Pick up time:</b> Weekend from 9 am to 4 pm'
+                            +'</p>'
+
+                            +'<p class="stext-102 cl3 p-t-23">'
+                             +   '<b>Seller name:</b> <a href="#">Dara Sok</a>'
+                            +'</p>'
+                            +'<p class="stext-102 cl3 p-t-23">'
+                             +   '<b>Tel:</b> 0121234569'
+                            +'</p>'
+
+                            +'<p class="stext-102 cl3 p-t-23">'
+                             +   '<b>Email:</b> seller@gmail.com'
+                            +'</p>'
+                            
+                           + '<p class="stext-102 cl3 p-t-23">'
+                            +    '<b>Instant Message:</b> seller (kakao)'
+                            +'</p>';
+
+                    text_container.prepend(html);
+                    $('.gallery-lb').each(function() { // the containers for all your galleries
+                        $(this).magnificPopup({
+                            delegate: 'a', // the selector for gallery item
+                            type: 'image',
+                            gallery: {
+                                enabled:true
+                            },
+                            mainClass: 'mfp-fade'
+                        });
+                    });
                 }
-*/            },
+            },
             error: function(data){
                 console.log(data);
             }
     
-    });
+        });
         $('.js-modal1').addClass('show-modal1');
     });
 
     $(document).off('click','.js-hide-modal1');
     $(document).on('click','.js-hide-modal1',function(){
         $('.js-modal1').removeClass('show-modal1');
+        $('.gallery-lb').empty();
+        $('.detail-text').empty();
+        $('.wrap-slick3-dots').empty();
+                    
+
     });
 
 
