@@ -330,7 +330,7 @@
 		
 
 	<!-- Slider -->
-	<section class="section-slide">
+	<!-- <section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
 				<div class="item-slick1" style="background-image: url({{asset('cozastore')}}/images/slide-01.jpg);">
@@ -408,7 +408,7 @@
 		</div>
 	</section>
 
-
+ -->
 	<!-- Banner -->
 	<div class="sec-banner bg0 p-t-80 p-b-50">
 		<div class="container">
@@ -506,15 +506,15 @@
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 						All Products
 					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
+					@foreach($directors as $director)
+						@php $classname = str_replace(' ','-', $director->director); @endphp
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".{{$classname}}">
+						{{$director->director}}
 					</button>
+					@endforeach
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
-					</button>
-
+					
+<!-- 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
 						Bag
 					</button>
@@ -525,7 +525,7 @@
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
-					</button>
+					</button> -->
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -714,11 +714,12 @@
 
 						<div class="filter-col4 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
-								Category
+								<!-- Director -->
 							</div>
 
 							<div class="flex-w p-t-4 m-r--5">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+																
+								<!-- <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 									Cloth
 								</a>
 
@@ -736,7 +737,7 @@
 
 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 									Book
-								</a>
+								</a> -->
 							</div>
 						</div>
 					</div>
@@ -747,7 +748,8 @@
 			
 			<div class="row isotope-grid">
 				@foreach ($movies as $movie)
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					@php $director = str_replace(' ','-',$movie->director); @endphp
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$director}}">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
@@ -794,7 +796,7 @@
 			<div class="flex-c-m flex-w w-full p-t-45">
 				<input id="offset" value="0" type='hidden'>
 				<a href="javascript:void(0);" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" id="loadmore">
-					Load More1
+					Load More
 				</a>
 			</div>
 			

@@ -382,7 +382,9 @@ EOF;
 	public function home(){
 
 		$movies = Movie::getMoviesWithThumbnail();
-		return view('frontend.index',['movies'=>$movies]);
+		$directors = Movie::select(DB::raw('distinct if(isnull(director),"Unknown",director) as director'))->get();
+		return view('frontend.index',['movies'=>$movies
+										, 'directors'=>$directors]);
 	}
 
 	public function getmoviemore(Request $request){
@@ -393,9 +395,10 @@ EOF;
 			$items = array();
 			
 			foreach ($movies as $movie){
+				$director = str_replace(' ','-',$movie->director);
 				$html = "";
 				$html .= <<<eot
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item $director">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">

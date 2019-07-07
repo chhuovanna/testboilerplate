@@ -284,7 +284,7 @@
 
     $(document).off('click', '.js-show-modal1');
     $(document).on('click', '.js-show-modal1',function(e){
-        //alert($(this).data('mid'));
+        $('.js-modal1').addClass('show-modal1');
         $.ajax({
             type:"GET",
             url:"admin/movie/getmoviedetail",
@@ -302,12 +302,18 @@
                     var temp;
                     
 
-                    if (movie['photos'] !== 'undefined'){
-                        alert('hter');
+                    if (movie['photos'].length > 0){
+                        //alert('hter');
                         size = movie['photos'].length;
                         for (i = 0; i< size ; i++){
+/*
                             location = movie['photos'][i]['location']+'\\'+movie['photos'][i]['file_name'];
-                            html = '<div class="item-slick3" data-thumb="'+location+'">';
+                            html = html + '<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'
+                                        +location+'">';
+                            html = html + '<i class="fa fa-expand"></i></a>';
+*/
+                            location = movie['photos'][i]['location']+'\\'+movie['photos'][i]['file_name'];
+                            html = html + '<div class="item-slick3" data-thumb="'+location+'">';
                             html = html + '<div class="wrap-pic-w pos-relative">';
                             html = html + '<img src="'+location+'" alt="IMG-PRODUCT">';
                             html = html + '<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'
@@ -320,7 +326,7 @@
                     }
 
 
-                    if (movie['thumbnail'] !== 'undefined'){
+                    if (movie['thumbnail'] !== null){
                         location = movie['thumbnail']['location']+'\\'+movie['thumbnail']['file_name'];
                         
                     }else{
@@ -333,6 +339,11 @@
                     html = html + '<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'
                                 +location+'">';
                     html = html + '<i class="fa fa-expand"></i></a></div></div>';
+                    
+/*                    html = html + '<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'
+                                +location+'">';
+                    html = html + '<i class="fa fa-expand"></i></a>';
+*/                    
                     gl_container.prepend(html);
                     html = "";
 
@@ -377,6 +388,37 @@
                             mainClass: 'mfp-fade'
                         });
                     });
+
+                    $('.wrap-slick3').each(function(){
+                        var ele = $(this).find('.slick3');
+                        
+                        if (ele !== null){
+
+                            ele.slick({
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                fade: true,
+                                infinite: true,
+                                autoplay: false,
+                                autoplaySpeed: 6000,
+
+                                arrows: true,
+                                appendArrows: $(this).find('.wrap-slick3-arrows'),
+                                prevArrow:'<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left" aria-hidden="true"></i></button>',
+                                nextArrow:'<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right" aria-hidden="true"></i></button>',
+
+                                dots: true,
+                                appendDots: $(this).find('.wrap-slick3-dots'),
+                                dotsClass:'slick3-dots',
+                                customPaging: function(slick, index) {
+                                    var portrait = $(slick.$slides[index]).data('thumb');
+                                    return '<img src=" ' + portrait + ' "/><div class="slick3-dot-overlay"></div>';
+                                },  
+                            });
+
+                        }
+                    });
+                    
                 }
             },
             error: function(data){
@@ -384,16 +426,15 @@
             }
     
         });
-        $('.js-modal1').addClass('show-modal1');
+        
     });
 
     $(document).off('click','.js-hide-modal1');
     $(document).on('click','.js-hide-modal1',function(){
         $('.js-modal1').removeClass('show-modal1');
+        $('.gallery-lb').slick('unslick');
         $('.gallery-lb').empty();
         $('.detail-text').empty();
-        $('.wrap-slick3-dots').empty();
-                    
 
     });
 

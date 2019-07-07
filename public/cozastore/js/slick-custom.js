@@ -6,7 +6,7 @@
 
         /*==================================================================
         [ Slick1 ]*/
-        $('.wrap-slick1').each(function(){
+       /* $('.wrap-slick1').each(function(){
             var wrapSlick1 = $(this);
             var slick1 = $(this).find('.slick1');
 
@@ -87,7 +87,7 @@
 
         });
 
-        /*==================================================================
+*/        /*==================================================================
         [ Slick2 ]*/
         $('.wrap-slick2').each(function(){
             $(this).find('.slick2').slick({
@@ -141,7 +141,7 @@
         
         /*==================================================================
         [ Slick3 ]*/
-        $('.wrap-slick3').each(function(){
+        /*$('.wrap-slick3').each(function(){
             $(this).find('.slick3').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,
@@ -164,7 +164,7 @@
                 },  
             });
         });
-            
+        */    
                 
 
 })(jQuery);

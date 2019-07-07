@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class movie extends Model
 {
@@ -23,7 +24,7 @@ class movie extends Model
     }
 
     public static function getMoviesWithThumbnail($offset=0){
-        $movies = Movie::select(['movie.mID', 'title', 'director', 'year', 'image.file_name', 'image.location'])
+        $movies = Movie::select(['movie.mID', 'title', DB::raw('if(isnull(director), "Unknown", director) as director'), 'year', 'image.file_name', 'image.location'])
         ->leftJoin('image','thumbnail_id', '=', 'image.image_id')->orderBy('movie.mID','desc')->offset($offset)
                 ->limit(20)->get();
 
