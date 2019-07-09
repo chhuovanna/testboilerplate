@@ -563,37 +563,37 @@
 
 							<ul>
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="default">
 										Default
 									</a>
 								</li>
 
-								<li class="p-b-6">
+							<!-- 	<li class="p-b-6">
 									<a href="#" class="filter-link stext-106 trans-04">
 										Popularity
 									</a>
-								</li>
+								</li> -->
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="avgrating">
 										Average rating
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-link-active sort-by" data-sort="newness">
 										Newness
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="hightolow">
 										Price: Low to High
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="lowtohigh">
 										Price: High to Low
 									</a>
 								</li>
@@ -607,37 +607,37 @@
 
 							<ul>
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-link-active filter-by" data-filter="all">
 										All
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="50">
 										$0.00 - $50.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="100">
 										$50.00 - $100.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="150">
 										$100.00 - $150.00
 									</a>
 								</li>
 
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+								<li class="p-b-6"> 
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="200">
 										$150.00 - $200.00
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="expensive">
 										$200.00+
 									</a>
 								</li>
@@ -765,15 +765,20 @@
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<!-- <a href="javascript:void(0)" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6 title">
 									{{$movie->title}}
-								</a>
+								</a> -->
 
-								<span class="stext-105 cl3">
+								<span class="stext-105 cl3 title">
+									<b>{{$movie->title}}</b>
+								</span>
+
+
+								<span class="stext-105 cl3 year">
 									{{$movie->year}}
 								</span>
 
-								<span class="stext-105 cl3">
+								<span class="stext-105 cl3 director">
 									{{$movie->director}}
 								</span>
 							</div>

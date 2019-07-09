@@ -473,6 +473,38 @@
             }); 
     
     });
+ /*===================================================================[ sort by ]*/
+    $(document).off('click','.sort-by');
+    $(document).on('click','.sort-by', function(){
+        var sort_by = $(this).data('sort');
+        alert(sort_by);
+    });
+
+/*===================================================================[ filter by ]*/
+    $(document).off('click','.filter-by');
+    $(document).on('click','.filter-by', function(){
+        var filter_by = $(this).data('filter');
+
+        //alert(filter_by);
+
+        
+        $topeContainer.isotope({
+          // filter element with numbers greater than 50
+          filter: function() {
+            var year = parseInt($(this).find('.year').text());
+
+
+            if (isNaN(filter_by)){
+                return year > 2000;
+            }else{
+                var year = parseInt(filter_by);
+                return (year >= filter_by - 50 &&  year <= filter_by);
+            }
+          }
+        });
+        
+
+    })
 
 
 })(jQuery);
