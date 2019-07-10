@@ -398,7 +398,7 @@ EOF;
 				$director = str_replace(' ','-',$movie->director);
 				$html = "";
 				$html .= <<<eot
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item $director">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item $director" data-mid="$movie->mID">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
@@ -425,15 +425,17 @@ eot;
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									$movie->title
-								</a>
+								
 
 								<span class="stext-105 cl3">
+									<b class='title'>$movie->title</b>
+								</span>
+
+								<span class="stext-105 cl3 year">
 									$movie->year
 								</span>
 
-								<span class="stext-105 cl3">
+								<span class="stext-105 cl3 director">
 									$movie->director
 								</span>
 							</div>

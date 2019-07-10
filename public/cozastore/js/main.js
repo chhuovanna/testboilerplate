@@ -127,18 +127,67 @@
 
 
     /*==================================================================
-    [ Isotope ]*/
+    [ Isotope ] */
     var $topeContainer = $('.isotope-grid');
     var $filter = $('.filter-tope-group');
 
     // filter items on button click
-    $filter.each(function () {
+    /*$filter.each(function () {
         $filter.on('click', 'button', function () {
             var filterValue = $(this).attr('data-filter');
             $topeContainer.isotope({filter: filterValue});
         });
         
     });
+*/    
+
+    /////////////////////edited by vanna
+    $filter.each(function () {
+        $filter.on('click', 'button', function () {
+            //var filterValue = $(this).attr('data-filter');
+
+            $topeContainer.isotope({
+                filter: function(){
+                    var year = parseInt($(this).find('.year').text());
+                    var filter_by = $('.filter-year').val();
+                    var active_director = $('.how-active1').data('filter').substring(1);
+                   // alert('imaher');
+
+                    //$('.testoutput').append('<p>'+active_director+'</p>'+'<p>'+filter_by+'</p>');
+                    
+                    
+                   
+                    if (isNaN(filter_by)){
+                        if (filter_by  == 'all'){
+                            if ( active_director === '')
+                                return true;
+                            else
+                                return $(this).hasClass(active_director);
+                        }else{
+                            if ( active_director === '')
+                                return (year >= 2000 );
+                            else
+                                return (year >= 2000 ) && $(this).hasClass(active_director);    
+                        }
+                        
+                    }else{
+                        filter_by = parseInt(filter_by);
+                        
+                        if (year >= (filter_by - 500) &&  year <= filter_by){
+
+                            if ( active_director == '*')
+                                return true;
+                            else
+                                return $(this).hasClass(active_director);
+                        }
+                        else
+                            return false;
+                    }
+                }
+            });
+        });
+        
+    })
 
     // init Isotope
     $(window).on('load', function () {
@@ -462,7 +511,8 @@
                             var $content;
                             for (i=0; i< items.length; i ++){
                                 $content = $(items[i]);
-                                $('.isotope-grid').append( $content ).isotope( 'appended', $content );
+                                $('.isotope-grid').append( $content );
+                                $('.isotope-grid').isotope( 'insert', $content );
                             }
                             $('#offset').val(offset);
                         }
@@ -474,31 +524,96 @@
     
     });
  /*===================================================================[ sort by ]*/
+
+    $topeContainer.isotope({
+        getSortData: {
+            mid: '[data-mid] parseInt',
+            title: '.title',
+            year: '.year parseInt'
+        },
+    });
+
     $(document).off('click','.sort-by');
     $(document).on('click','.sort-by', function(){
         var sort_by = $(this).data('sort');
-        alert(sort_by);
+        var old_sort_by = $('.filter-link-active');
+        old_sort_by.removeClass('filter-link-active');
+        $(this).addClass('filter-link-active');
+
+        if(sort_by == 'default'){
+            $topeContainer.isotope({
+                sortBy: ''
+            });
+        }else if(sort_by == 'title'){
+            $topeContainer.isotope({
+                sortBy: 'title'
+            });
+        }else if(sort_by == 'newness'){
+            $topeContainer.isotope({
+                sortBy: 'mid',
+                sortAscending: false
+            });
+        }else if (sort_by == 'hightolow'){
+            $topeContainer.isotope({
+                sortBy: 'year',
+                sortAscending: true
+            });
+        }else if (sort_by == 'lowtohigh'){
+            $topeContainer.isotope({
+                sortBy: 'year',
+                sortAscending: false
+            });
+        }
     });
 
 /*===================================================================[ filter by ]*/
     $(document).off('click','.filter-by');
     $(document).on('click','.filter-by', function(){
-        var filter_by = $(this).data('filter');
+        var old_active = $('.filter-link-active');
+        
 
-        //alert(filter_by);
+        $(this).addClass('filter-link-active');
+        old_active.removeClass('filter-link-active');
+        
+        $('.filter-year').val($(this).data('filter'));
+
 
         
         $topeContainer.isotope({
-          // filter element with numbers greater than 50
+         
           filter: function() {
             var year = parseInt($(this).find('.year').text());
+            var filter_by = $('.filter-year').val();
+            var active_director = $('.how-active1').data('filter').substring(1);
 
-
+            //$('.testoutput').append('<p>'+active_director+'</p>'+'<p>'+filter_by+'</p>');
+            
+           
             if (isNaN(filter_by)){
-                return year > 2000;
+                if (filter_by  == 'all'){
+                    if ( active_director == '*')
+                        return true;
+                    else
+                        return $(this).hasClass(active_director);
+                }else{
+                    if ( active_director == '*')
+                        return (year >= 2000 );
+                    else
+                        return (year >= 2000 ) && $(this).hasClass(active_director);    
+                }
+                
             }else{
-                var year = parseInt(filter_by);
-                return (year >= filter_by - 50 &&  year <= filter_by);
+                filter_by = parseInt(filter_by);
+                
+                if (year >= (filter_by - 500) &&  year <= filter_by){
+
+                    if ( active_director == '*')
+                        return true;
+                    else
+                        return $(this).hasClass(active_director);
+                }
+                else
+                    return false;
             }
           }
         });

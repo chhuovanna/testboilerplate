@@ -526,6 +526,7 @@
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
 						Watches
 					</button> -->
+					<input type="hidden" class="filter-year" value='all'>
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">
@@ -563,7 +564,7 @@
 
 							<ul>
 								<li class="p-b-6">
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="default">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-link-active sort-by" data-sort="default">
 										Default
 									</a>
 								</li>
@@ -574,27 +575,34 @@
 									</a>
 								</li> -->
 
-								<li class="p-b-6">
+								<!-- <li class="p-b-6">
 									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="avgrating">
 										Average rating
+									</a>
+								</li> -->
+								<li class="p-b-6">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="title">
+										Title
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-link-active sort-by" data-sort="newness">
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="newness">
 										Newness
 									</a>
 								</li>
 
 								<li class="p-b-6">
 									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="hightolow">
-										Price: Low to High
+										<!-- Price: Low to High -->
+										Year: Low to High
 									</a>
 								</li>
 
 								<li class="p-b-6">
 									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 sort-by" data-sort="lowtohigh">
-										Price: High to Low
+										<!-- Price: High to Low -->
+										Year: Low to High
 									</a>
 								</li>
 							</ul>
@@ -602,7 +610,8 @@
 
 						<div class="filter-col2 p-r-15 p-b-27">
 							<div class="mtext-102 cl2 p-b-15">
-								Price
+								Release Year
+								<!-- Price -->
 							</div>
 
 							<ul>
@@ -613,32 +622,36 @@
 								</li>
 
 								<li class="p-b-6">
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="50">
-										$0.00 - $50.00
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="500">
+										0 - 500
+										<!-- $0.00 - $50.00 -->
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="100">
-										$50.00 - $100.00
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="1000">
+										500 - 1000
+										<!-- $50.00 - $100.00 -->
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="150">
-										$100.00 - $150.00
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="1500">
+										1000 - 1500
+										<!-- $100.00 - $150.00 -->
 									</a>
 								</li>
 
 								<li class="p-b-6"> 
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="200">
-										$150.00 - $200.00
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="2000">
+										1500 - 2000
+										<!-- $150.00 - $200.00 -->
 									</a>
 								</li>
 
 								<li class="p-b-6">
-									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="expensive">
-										$200.00+
+									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="after2000">
+										2000+
 									</a>
 								</li>
 							</ul>
@@ -713,7 +726,7 @@
 						</div> -->
 
 						<div class="filter-col4 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
+							<div class="mtext-102 cl2 p-b-15 testoutput">
 								<!-- Director -->
 							</div>
 
@@ -749,7 +762,7 @@
 			<div class="row isotope-grid">
 				@foreach ($movies as $movie)
 					@php $director = str_replace(' ','-',$movie->director); @endphp
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$director}}">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$director}}" data-mid="{{$movie->mID}}">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
@@ -769,8 +782,8 @@
 									{{$movie->title}}
 								</a> -->
 
-								<span class="stext-105 cl3 title">
-									<b>{{$movie->title}}</b>
+								<span class="stext-105 cl3 ">
+									<b class="title">{{$movie->title}}</b>
 								</span>
 
 
