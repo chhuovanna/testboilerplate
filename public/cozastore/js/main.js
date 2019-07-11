@@ -175,7 +175,7 @@
                         
                         if (year >= (filter_by - 500) &&  year <= filter_by){
 
-                            if ( active_director == '*')
+                            if ( active_director == '')
                                 return true;
                             else
                                 return $(this).hasClass(active_director);
@@ -570,7 +570,8 @@
     $(document).off('click','.filter-by');
     $(document).on('click','.filter-by', function(){
         var old_active = $('.filter-link-active');
-        
+
+
 
         $(this).addClass('filter-link-active');
         old_active.removeClass('filter-link-active');
@@ -590,13 +591,14 @@
             
            
             if (isNaN(filter_by)){
+                $('.testoutput').append('<p>'+year+'</p>>' + '<p>'+filter_by+'</p>>'+'<p>'+active_director+'</p>>');
                 if (filter_by  == 'all'){
-                    if ( active_director == '*')
+                    if ( active_director == '')
                         return true;
                     else
                         return $(this).hasClass(active_director);
                 }else{
-                    if ( active_director == '*')
+                    if ( active_director == '')
                         return (year >= 2000 );
                     else
                         return (year >= 2000 ) && $(this).hasClass(active_director);    
@@ -607,7 +609,7 @@
                 
                 if (year >= (filter_by - 500) &&  year <= filter_by){
 
-                    if ( active_director == '*')
+                    if ( active_director == '')
                         return true;
                     else
                         return $(this).hasClass(active_director);

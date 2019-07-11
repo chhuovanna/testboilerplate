@@ -4,7 +4,7 @@
 	<title>Home</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="{{asset('cozastore')}}/images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/bootstrap/css/bootstrap.min.css">
@@ -16,13 +16,13 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/animate/animate.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/vendor/slick/slick.css">
@@ -34,10 +34,10 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/css/util.css">
 	<link rel="stylesheet" type="text/css" href="{{asset('cozastore')}}/css/main.css">
 <!--===============================================================================================-->
-	
+
 </head>
 <body class="animsition">
-	
+
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
@@ -71,8 +71,8 @@
 
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
+
+					<!-- Logo desktop -->
 					<a href="#" class="logo">
 						<img src="{{asset('cozastore')}}/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
@@ -109,7 +109,7 @@
 								<a href="contact.html">Contact</a>
 							</li>
 						</ul>
-					</div>	
+					</div>
 
 					<!-- Icon header -->
 					<!-- <div class="wrap-icon-header flex-w flex-r-m">
@@ -126,12 +126,12 @@
 						</a>
 					</div> -->
 				</nav>
-			</div>	
+			</div>
 		</div>
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
+			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="index.html"><img src="{{asset('cozastore')}}/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
@@ -256,7 +256,7 @@
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
-			
+
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
@@ -307,7 +307,7 @@
 						</div>
 					</li>
 				</ul>
-				
+
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
 						Total: $75.00
@@ -327,7 +327,7 @@
 		</div>
 	</div>
  -->
-		
+
 
 	<!-- Slider -->
 	<!-- <section class="section-slide">
@@ -341,13 +341,13 @@
 									Women Collection 2018
 								</span>
 							</div>
-								
+
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
 									NEW SEASON
 								</h2>
 							</div>
-								
+
 							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
@@ -365,13 +365,13 @@
 									Men New-Season
 								</span>
 							</div>
-								
+
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
 									Jackets & Coats
 								</h2>
 							</div>
-								
+
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
@@ -389,13 +389,13 @@
 									Men Collection 2018
 								</span>
 							</div>
-								
+
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
 									New arrivals
 								</h2>
 							</div>
-								
+
 							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
@@ -513,8 +513,8 @@
 					</button>
 					@endforeach
 
-					
-<!-- 
+
+<!--
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
 						Bag
 					</button>
@@ -542,7 +542,7 @@
 						Search
 					</div>
 				</div>
-				
+
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
 					<div class="bor8 dis-flex p-l-15">
@@ -551,7 +551,7 @@
 						</button>
 
 						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>	
+					</div>
 				</div>
 
 				<!-- Filter -->
@@ -642,7 +642,7 @@
 									</a>
 								</li>
 
-								<li class="p-b-6"> 
+								<li class="p-b-6">
 									<a href="javascript:void(0)" class="filter-link stext-106 trans-04 filter-by" data-filter="2000">
 										1500 - 2000
 										<!-- $150.00 - $200.00 -->
@@ -731,7 +731,7 @@
 							</div>
 
 							<div class="flex-w p-t-4 m-r--5">
-																
+
 								<!-- <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 									Cloth
 								</a>
@@ -758,7 +758,7 @@
 			</div>
 
 
-			
+
 			<div class="row isotope-grid">
 				@foreach ($movies as $movie)
 					@php $director = str_replace(' ','-',$movie->director); @endphp
@@ -805,7 +805,7 @@
  						</div>
 					</div>
 				</div>
-				
+
 				@endforeach
 			</div>
 
@@ -817,7 +817,7 @@
 					Load More
 				</a>
 			</div>
-			
+
 		</div>
 	</section>
 
@@ -872,7 +872,7 @@
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
+								Returns
 							</a>
 						</li>
 
@@ -1026,7 +1026,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<!-- <div class="p-r-50 p-t-5 p-lr-0-lg"> -->
 						 <div class="p-r-50 p-t-5 p-lr-0-lg detail-text">
@@ -1041,7 +1041,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							<p class="stext-102 cl3 p-t-23">
 								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
 							</p>
-							
+
 							<p class="stext-102 cl3 p-t-23">
 								<b>Category:</b> <a href="#">Cloth</a>
 							</p>
@@ -1065,11 +1065,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							<p class="stext-102 cl3 p-t-23">
 								<b>Email:</b> seller@gmail.com
 							</p>
-							
+
 							<p class="stext-102 cl3 p-t-23">
 								<b>Instant Message:</b> seller (kakao)
 							</p>
-						 -->	
+						 -->
 
 							<!--  -->
 							<!-- <div class="p-t-33">
@@ -1129,7 +1129,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 											Add to cart
 										</button>
 									</div>
-								</div>	
+								</div>
 							</div> -->
 
 							<!--  -->
@@ -1159,7 +1159,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</div>
 
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<script src="{{asset('cozastore')}}/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="{{asset('cozastore')}}/vendor/animsition/js/animsition.min.js"></script>
@@ -1239,7 +1239,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				swal(nameProduct, "is added to cart !", "success");
 			});
 		});
-	
+
 	</script>
 <!--===============================================================================================-->
 	<script src="{{asset('cozastore')}}/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
